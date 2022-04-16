@@ -3,7 +3,8 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Headline} from 'react-native-paper';
 
-import {IDate, DAY_OF_WEEK, MONTHS} from '@myapp/models/date.model';
+import {MONTHS, DAY_OF_WEEK} from '@myapp/configs/date.config';
+import {IDate} from '@myapp/models/date.model';
 
 const dateBuilder = () => {
   let d = new Date();

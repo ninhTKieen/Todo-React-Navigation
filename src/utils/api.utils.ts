@@ -1,9 +1,4 @@
-import axios, {
-  AxiosPromise,
-  AxiosRequestConfig,
-  AxiosRequestHeaders,
-  Method,
-} from 'axios';
+import axios, {AxiosRequestConfig, AxiosRequestHeaders, Method} from 'axios';
 interface ApiMethod {
   GET: Method;
   POST: Method;
@@ -26,7 +21,7 @@ interface ApiParams {
   data?: object | null;
 }
 
-export function axiosRequest<Type>(config: ApiParams): AxiosPromise<Type> {
+export async function axiosRequest(config: ApiParams) {
   const {url, method, data, params, token} = config;
 
   const axiosConfig: AxiosRequestConfig = {
@@ -44,5 +39,7 @@ export function axiosRequest<Type>(config: ApiParams): AxiosPromise<Type> {
     axiosConfig.headers = headers;
   }
 
-  return axios(axiosConfig) as AxiosPromise<Type>;
+  const response = await axios(axiosConfig);
+
+  return response.data;
 }

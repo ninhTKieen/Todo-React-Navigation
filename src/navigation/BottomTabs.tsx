@@ -7,6 +7,7 @@ import HomeScreen from '@myapp/screens/Home';
 import ProfileScreen from '@myapp/screens/Profile';
 import SettingsScreen from '@myapp/screens/Settings';
 import TodosScreen from '@myapp/screens/Todos';
+import NotiScreen from '@myapp/screens/Notifications';
 import TabIcon from '@myapp/components/TabsIcon';
 
 const Tab = createBottomTabNavigator();
@@ -38,6 +39,19 @@ const BottomTabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon name="reader-outline" focused={focused} label="Todos" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Noti"
+        component={NotiScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <TabIcon
+              name="ios-notifications-outline"
+              focused={focused}
+              label="Noti"
+            />
           ),
         }}
       />

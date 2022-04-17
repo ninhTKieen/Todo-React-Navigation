@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 
 import {View, TouchableWithoutFeedback, StyleSheet} from 'react-native';
@@ -7,7 +8,7 @@ import ModalInput from './ModalInput';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import taskApi from '@myapp/api/todo.api';
+import taskApi from '@myapp/features/todos/todo.api';
 
 interface ITodoItem {
   item: any;
@@ -40,7 +41,6 @@ const TodoItem: React.FC<ITodoItem> = ({
           <View
             style={[
               styles.square,
-              // eslint-disable-next-line react-native/no-inline-styles
               {backgroundColor: item.isDone ? 'green' : 'transparent'},
             ]}>
             {item.isDone ? <Icon name="done" size={20} color="white" /> : null}

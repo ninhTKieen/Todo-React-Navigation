@@ -2,7 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 
 import createSagaMiddleWare from 'redux-saga';
 
-import rootSaga from '@myapp/saga/rootSaga';
+import rootSaga from '@myapp/features/rootSaga';
 import counterReducer from '@myapp/features/counter/counterSlice';
 import authReducer from '@myapp/features/auth/auth.slice';
 

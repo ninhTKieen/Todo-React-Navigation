@@ -20,7 +20,7 @@ const GeneralScreen = ({navigation}: any) => {
         name={item.name}
         countComment={item.countComment}
         countFollow={item.countFollow}
-        navigate={() => navigation.navigate('Detail')}
+        navigate={() => navigation.navigate('Detail', item)}
       />
     );
   };

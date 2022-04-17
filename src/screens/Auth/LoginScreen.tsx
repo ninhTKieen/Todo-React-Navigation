@@ -11,13 +11,18 @@ import {
 } from 'react-native';
 import {Surface, Title, Button, TextInput} from 'react-native-paper';
 
-import {useAppDispatch} from '@myapp/hooks/redux.hook';
-import {authActions} from '@myapp/features/auth/auth.slice';
+import {useAppDispatch, useAppSelector} from '@myapp/hooks/redux.hook';
+import {
+  authActions,
+  selectIsPendingLoggedIn,
+} from '@myapp/features/auth/auth.slice';
 
 const LoginScreen: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const isPendingLoggedIn = useAppSelector(selectIsPendingLoggedIn);
 
   const dispatch = useAppDispatch();
 
@@ -68,7 +73,8 @@ const LoginScreen: React.FC = () => {
                 }),
               )
             }
-            style={styles.button}>
+            style={styles.button}
+            loading={isPendingLoggedIn}>
             <Text>Login</Text>
           </Button>
         </Surface>

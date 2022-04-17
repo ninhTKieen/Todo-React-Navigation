@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {useTheme, Switch, Title, Subheading, Button} from 'react-native-paper';
 import {PreferencesContext} from '@myapp/Context';
 
@@ -34,7 +34,7 @@ const SettingsScreen: React.FC<ISettings> = () => {
         mode="contained"
         style={styles.button}
         onPress={() => dispatch(authActions.logout())}>
-        <Title>Log out</Title>
+        <Text>Log out</Text>
       </Button>
     </View>
   );

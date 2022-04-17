@@ -13,7 +13,7 @@ import {Appbar, FAB, useTheme} from 'react-native-paper';
 import TodoItem from '@myapp/components/Todos/TodoItem';
 import ModalInput from '@myapp/components/Todos/ModalInput';
 
-import taskApi from '@myapp/api/todo.api';
+import taskApi from '@myapp/features/todos/todo.api';
 
 const TodosScreen: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -24,7 +24,7 @@ const TodosScreen: React.FC = () => {
 
   const fetchTodoAPI = async () => {
     const apiResponse = await taskApi.getApi();
-    setTaskItems(apiResponse.data);
+    setTaskItems(apiResponse);
   };
 
   const addTodoAPI = async () => {

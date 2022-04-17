@@ -21,7 +21,7 @@ function* handleGetUser() {
     const accessToken: string = yield select(selectAccessToken);
     const response: IUser = yield call(authenApi.getUserAPI, {accessToken});
 
-    yield put({type: authActions.getUserInfoSuccess, payload: response});
+    yield put({type: authActions.getUserInfoSuccess.type, payload: response});
   } catch (error) {
     yield put({type: authActions.getUserInfoFailed.type});
   }

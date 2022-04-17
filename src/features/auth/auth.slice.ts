@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IAuthState, IUser} from '@myapp/models/auth.model';
+import {IAuthState, IToken, IUser} from '@myapp/models/auth.model';
 
 // const initialState: IAuthState = {
 //   isLoggedIn: false,
@@ -24,10 +24,10 @@ const authSlice = createSlice({
       state.isPendingLoggedIn = true;
     },
 
-    loginSuccess(state, action: PayloadAction<string>) {
+    loginSuccess(state, action: PayloadAction<IToken>) {
       state.isPendingLoggedIn = false;
       state.isLoggedIn = true;
-      state.accessToken = action.payload;
+      state.accessToken = action.payload.accessToken;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     loginFailed(state) {

@@ -1,5 +1,5 @@
 import {API_END_POINT} from '@env';
-import {ILoginPayload, IToken} from '@myapp/models/auth.model';
+import {ILoginPayload, IToken, IUser} from '@myapp/models/auth.model';
 
 import {axiosRequest, axiosMethod} from '@myapp/utils/api.utils';
 
@@ -23,7 +23,7 @@ class AuthenAPI {
     return {accessToken: response.result.accessToken};
   }
 
-  async getUserAPI({accessToken}: IToken) {
+  async getUserAPI({accessToken}: IToken): Promise<IUser> {
     const url = `${API_END_POINT}/api/services/app/User/GetDetail`;
     const response = await axiosRequest({
       token: accessToken,

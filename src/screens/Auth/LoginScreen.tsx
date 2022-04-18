@@ -17,7 +17,7 @@ import {
   selectIsPendingLoggedIn,
 } from '@myapp/features/auth/auth.slice';
 
-const LoginScreen: React.FC = () => {
+const LoginScreen: React.FC = ({navigation}: any) => {
   const [visible, setVisible] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -76,6 +76,13 @@ const LoginScreen: React.FC = () => {
             style={styles.button}
             loading={isPendingLoggedIn}>
             <Text>Login</Text>
+          </Button>
+
+          <Button
+            mode="text"
+            style={styles.button}
+            onPress={() => navigation.navigate('Register')}>
+            Don't have an account ?
           </Button>
         </Surface>
       </TouchableWithoutFeedback>

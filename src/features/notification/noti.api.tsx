@@ -1,4 +1,4 @@
-import {axiosMethod, axiosRequest} from '@myapp/utils/api.utils';
+import {axiosRequest} from '@myapp/utils/api.utils';
 import {
   INotiGeneralData,
   IUserCommentData,
@@ -32,12 +32,12 @@ class NotificationAPI {
   }
 
   async getUserComment(noticationId: number): Promise<IUserCommentData[]> {
-    // const url = `${API_END_POINT}/api/services/app/UserCityNotification/GetAllComment`;
-    const url = `${API_END_POINT}/api/services/app/UserCityNotification/GetAllComment?NotifiactionId=${noticationId}`;
-    // truyen params loi ?
+    const url = `${API_END_POINT}/api/services/app/UserCityNotification/GetAllComment`;
     const response = await axiosRequest({
       url,
-      method: axiosMethod.GET,
+      params: {
+        NotifiactionId: noticationId,
+      },
     });
 
     return response.result.data;

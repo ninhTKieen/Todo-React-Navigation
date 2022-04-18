@@ -48,7 +48,7 @@ const ProfileScreen: React.FC = () => {
 
       <View style={styles.itemContainer}>
         <Text>Email</Text>
-        <Text>{currentUser?.userName}@gmail.com</Text>
+        <Text>{currentUser?.emailAddress}</Text>
       </View>
     </ScrollView>
   );

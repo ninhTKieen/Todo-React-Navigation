@@ -6,13 +6,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {Provider as ReduxProvider} from 'react-redux';
 
+import {Appearance} from 'react-native';
 import {PreferencesContext} from '@myapp/Context';
 import {CombinedDarkTheme, CombinedDefaultTheme} from '@myapp/themes';
 
 import Navigator from '@myapp/navigation';
 
 const App = () => {
-  const [isThemeDark, setIsThemeDark] = React.useState(false);
+  const colorScheme = Appearance.getColorScheme();
+
+  const [isThemeDark, setIsThemeDark] = React.useState(colorScheme === 'dark');
 
   const theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
 

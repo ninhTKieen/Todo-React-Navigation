@@ -3,6 +3,17 @@ export interface ILoginPayload {
   password: string;
 }
 
+export interface IRegisterPayload {
+  name: string;
+  surname: string;
+  userName: string;
+  emailAddress: string;
+  password: string;
+  phoneNumber: string;
+  gender: string;
+  dateOfBirth: string;
+}
+
 export interface IUser {
   userName: string;
   name: string;
@@ -35,6 +46,7 @@ export interface IAuthState {
   accessToken?: string;
 
   isPendingLoggedIn: boolean;
+  isPendingRegister: boolean;
   isFetchingUserAPI: boolean;
 }
 

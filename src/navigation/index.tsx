@@ -3,6 +3,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LoginScreen from '@myapp/screens/Auth/LoginScreen';
+import RegisterScreen from '@myapp/screens/Auth/RegisterScreen';
 import BottomTabs from './BottomTabs';
 
 import {useAppDispatch} from '@myapp/hooks/redux.hook';
@@ -29,11 +30,18 @@ const Navigator = () => {
   return (
     <Stack.Navigator>
       {!isLoggedIn ? (
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{headerShown: false}}
-        />
+        <React.Fragment>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{headerShown: false}}
+          />
+        </React.Fragment>
       ) : (
         <Stack.Screen
           name="Bottom Tabs"

@@ -12,6 +12,7 @@ const initialState: IAuthState = {
   currentUser: undefined,
 
   isPendingLoggedIn: false,
+  isPendingRegister: false,
   isFetchingUserAPI: false,
 };
 
@@ -19,7 +20,6 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     login(state, _action: PayloadAction<{email: string; password: string}>) {
       state.isPendingLoggedIn = true;
     },
@@ -29,7 +29,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.accessToken = action.payload.accessToken;
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     loginFailed(state) {
       state.isPendingLoggedIn = false;
       state.isLoggedIn = false;
@@ -39,6 +39,21 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.currentUser = undefined;
       state.accessToken = undefined;
+    },
+
+    register(state) {
+      state.isPendingRegister = true;
+    },
+
+    registerSuccess(state, action: PayloadAction<IToken>) {
+      state.isPendingRegister = false;
+      state.isLoggedIn = true;
+      state.accessToken = action.payload.accessToken;
+    },
+
+    registerFailed(state) {
+      state.isPendingRegister = false;
+      state.isLoggedIn = true;
     },
 
     getUserInfo(state) {

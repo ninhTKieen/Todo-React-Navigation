@@ -1,5 +1,10 @@
 import {API_END_POINT} from '@env';
-import {ILoginPayload, IToken, IUser} from '@myapp/models/auth.model';
+import {
+  ILoginPayload,
+  IRegisterPayload,
+  IToken,
+  IUser,
+} from '@myapp/models/auth.model';
 
 import {axiosRequest, axiosMethod} from '@myapp/utils/api.utils';
 
@@ -21,6 +26,36 @@ class AuthenAPI {
     });
 
     return {accessToken: response.result.accessToken};
+  }
+
+  async registerAPI({
+    name,
+    surname,
+    userName,
+    emailAddress,
+    password,
+    phoneNumber,
+    gender,
+    dateOfBirth,
+  }: IRegisterPayload): Promise<{accessToken: string}> {
+    const url = `${API_END_POINT}/api/services/app/Account/Register`;
+    const data = {
+      name,
+      surname,
+      userName,
+      emailAddress,
+      password,
+      phoneNumber,
+      gender,
+      dateOfBirth,
+    };
+    await axiosRequest({
+      url,
+      method: axiosMethod.POST,
+      data,
+    });
+
+    return this.loginAPI({email: emailAddress, password});
   }
 
   async getUserAPI({accessToken}: IToken): Promise<IUser> {

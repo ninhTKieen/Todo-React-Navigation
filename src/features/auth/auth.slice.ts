@@ -38,6 +38,7 @@ const authSlice = createSlice({
     logout(state) {
       state.isLoggedIn = false;
       state.currentUser = undefined;
+      state.accessToken = undefined;
     },
 
     getUserInfo(state) {

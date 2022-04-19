@@ -5,11 +5,52 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   Keyboard,
+  Text,
 } from 'react-native';
-import {Surface, TextInput, Title, Subheading} from 'react-native-paper';
+import {
+  Surface,
+  TextInput,
+  Title,
+  Subheading,
+  Button,
+} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import DatePicker from 'react-native-date-picker';
 
-const RegisterScreen = () => {
+import {authActions} from '@myapp/features/auth/auth.slice';
+import {useAppDispatch} from '@myapp/hooks/redux.hook';
+
+const RegisterScreen = ({navigation}: any) => {
+  const dispatch = useAppDispatch();
+
+  const [name, setName] = React.useState<string>('');
+  const [surname, setSurname] = React.useState<string>('');
+  const [userName, setUserName] = React.useState<string>('');
+  const [emailAddress, setEmailAddress] = React.useState<string>('');
+  const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+  const [address, setAddress] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+  const [gender, setGender] = React.useState<string>('');
+  const [dateOfBirth, setDateOfBirth] = React.useState<Date>(new Date());
   const [visible, setVisible] = React.useState(false);
+
+  const onRegisterButtonPress = (): void => {
+    if (!!emailAddress && !!name && !!userName && !!password) {
+      dispatch(
+        authActions.register({
+          emailAddress,
+          userName,
+          name,
+          surname,
+          phoneNumber,
+          address,
+          gender,
+          dateOfBirth: dateOfBirth.toString(),
+          password,
+        }),
+      );
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -27,6 +68,8 @@ const RegisterScreen = () => {
               label="Name"
               style={styles.inputWrapper}
               right={<TextInput.Icon name="account" />}
+              value={name}
+              onChangeText={setName}
             />
 
             <TextInput
@@ -34,6 +77,8 @@ const RegisterScreen = () => {
               label="Surname"
               style={styles.inputWrapper}
               right={<TextInput.Icon name="account" />}
+              value={surname}
+              onChangeText={setSurname}
             />
           </Surface>
 
@@ -43,6 +88,8 @@ const RegisterScreen = () => {
               label="Email"
               style={styles.input}
               right={<TextInput.Icon name="email" />}
+              value={emailAddress}
+              onChangeText={setEmailAddress}
             />
           </Surface>
 
@@ -52,6 +99,8 @@ const RegisterScreen = () => {
               label="Username"
               style={styles.input}
               right={<TextInput.Icon name="email" />}
+              value={userName}
+              onChangeText={setUserName}
             />
           </Surface>
 
@@ -59,8 +108,19 @@ const RegisterScreen = () => {
             <TextInput
               mode="outlined"
               label="Phone"
-              style={styles.input}
+              style={styles.inputWrapper}
               right={<TextInput.Icon name="phone" />}
+              value={phoneNumber}
+              onChangeText={setPhoneNumber}
+            />
+
+            <TextInput
+              mode="outlined"
+              label="Gender"
+              style={styles.inputWrapper}
+              right={<TextInput.Icon name="gender-male-female" />}
+              value={gender}
+              onChangeText={setGender}
             />
           </Surface>
 
@@ -76,6 +136,8 @@ const RegisterScreen = () => {
                   onPress={() => setVisible(!visible)}
                 />
               }
+              value={password}
+              onChangeText={setPassword}
             />
           </Surface>
 
@@ -85,8 +147,34 @@ const RegisterScreen = () => {
               label="Address"
               style={styles.input}
               right={<TextInput.Icon name="directions" />}
+              value={address}
+              onChangeText={setAddress}
             />
           </Surface>
+
+          <Surface style={styles.dateOfBirth}>
+            <Icon name="birthday-cake" size={32} />
+            <DatePicker
+              date={dateOfBirth}
+              onDateChange={setDateOfBirth}
+              mode="date"
+              style={{height: 50, width: 220}}
+            />
+          </Surface>
+
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={onRegisterButtonPress}>
+            <Text>Register</Text>
+          </Button>
+
+          <Button
+            mode="text"
+            style={styles.button}
+            onPress={() => navigation.navigate('Login')}>
+            Already have an account ?
+          </Button>
         </Surface>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -110,7 +198,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 50,
+    height: 40,
     width: '100%',
   },
 
@@ -122,8 +210,23 @@ const styles = StyleSheet.create({
   },
 
   inputWrapper: {
-    height: 50,
+    height: 40,
     width: '45%',
+  },
+
+  dateOfBirth: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '100%',
+    alignItems: 'center',
+  },
+
+  button: {
+    width: '90%',
+    height: 50,
+    justifyContent: 'center',
+    marginTop: 20,
   },
 });
 

@@ -10,6 +10,7 @@ export interface IRegisterPayload {
   emailAddress: string;
   password: string;
   phoneNumber: string;
+  address: string;
   gender: string;
   dateOfBirth: string;
 }

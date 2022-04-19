@@ -35,6 +35,7 @@ class AuthenAPI {
     emailAddress,
     password,
     phoneNumber,
+    address,
     gender,
     dateOfBirth,
   }: IRegisterPayload): Promise<{accessToken: string}> {
@@ -46,6 +47,7 @@ class AuthenAPI {
       emailAddress,
       password,
       phoneNumber,
+      address,
       gender,
       dateOfBirth,
     };

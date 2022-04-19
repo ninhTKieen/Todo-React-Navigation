@@ -1,5 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IAuthState, IToken, IUser} from '@myapp/models/auth.model';
+import {
+  IAuthState,
+  IToken,
+  IUser,
+  IRegisterPayload,
+} from '@myapp/models/auth.model';
 
 // const initialState: IAuthState = {
 //   isLoggedIn: false,
@@ -41,7 +46,7 @@ const authSlice = createSlice({
       state.accessToken = undefined;
     },
 
-    register(state) {
+    register(state, _action: PayloadAction<IRegisterPayload>) {
       state.isPendingRegister = true;
     },
 

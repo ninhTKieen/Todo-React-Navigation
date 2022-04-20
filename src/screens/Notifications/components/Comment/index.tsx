@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
-import {List, Avatar} from 'react-native-paper';
+import {List, Avatar, Text} from 'react-native-paper';
+
+import formatDistance from 'date-fns/formatDistance';
 
 import notiApi from '@myapp/features/notification/noti.api';
 import {IUserCommentData} from '@myapp/models/noti.model';
@@ -21,6 +23,15 @@ const NotificationComments: React.FC<NotiCommentProps> = ({noticationId}) => {
     return;
   }, [noticationId]);
 
+  const TimeDistance: React.FC<{creationTime: string}> = ({creationTime}) => (
+    <Text>
+      {formatDistance(new Date(creationTime), new Date(), {
+        addSuffix: true,
+        includeSeconds: true,
+      })}
+    </Text>
+  );
+
   const UserAvatar = ({avatar}: {avatar: string}) => {
     return (
       <Avatar.Image
@@ -40,6 +51,9 @@ const NotificationComments: React.FC<NotiCommentProps> = ({noticationId}) => {
           <List.Item
             key={item.id}
             left={props => <UserAvatar {...props} avatar={item.avatar} />}
+            right={props => (
+              <TimeDistance {...props} creationTime={item.creationTime} />
+            )}
             title={item.fullName}
             description={item.comment}
             descriptionNumberOfLines={0}

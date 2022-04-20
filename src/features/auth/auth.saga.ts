@@ -23,7 +23,12 @@ function* handleLogin(action: PayloadAction<ILoginPayload>) {
 
 function* handleRegister(action: PayloadAction<IRegisterPayload>) {
   try {
-    const response: IToken = yield call(authenApi.registerAPI, action.payload);
+    yield call(authenApi.registerAPI, action.payload);
+
+    const response: IToken = yield call(authenApi.loginAPI, {
+      email: action.payload.emailAddress,
+      password: action.payload.password,
+    });
 
     yield put({type: authActions.registerSuccess.type, payload: response});
   } catch (error) {

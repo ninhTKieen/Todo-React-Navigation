@@ -38,7 +38,7 @@ class AuthenAPI {
     address,
     gender,
     dateOfBirth,
-  }: IRegisterPayload): Promise<{accessToken: string}> {
+  }: IRegisterPayload): Promise<{canLogin: boolean}> {
     const url = `${API_END_POINT}/api/services/app/Account/Register`;
     const data = {
       name,
@@ -51,13 +51,13 @@ class AuthenAPI {
       gender,
       dateOfBirth,
     };
-    await axiosRequest({
+    const response = await axiosRequest({
       url,
       method: axiosMethod.POST,
       data,
     });
 
-    return this.loginAPI({email: emailAddress, password});
+    return {canLogin: response.result.canLogin};
   }
 
   async getUserAPI({accessToken}: IToken): Promise<IUser> {

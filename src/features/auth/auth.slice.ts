@@ -58,7 +58,7 @@ const authSlice = createSlice({
 
     registerFailed(state) {
       state.isPendingRegister = false;
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
     },
 
     getUserInfo(state) {

@@ -45,7 +45,7 @@ const RegisterScreen = ({navigation}: any) => {
           phoneNumber,
           address,
           gender,
-          dateOfBirth: dateOfBirth.toString(),
+          dateOfBirth: dateOfBirth.toISOString(),
           password,
         }),
       );

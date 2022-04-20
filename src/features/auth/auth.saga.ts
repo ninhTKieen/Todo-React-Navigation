@@ -1,13 +1,18 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 
 import authenApi from './auth.api';
-import {ILoginPayload, IRegisterPayload, IUser} from '@myapp/models/auth.model';
+import {
+  ILoginPayload,
+  IRegisterPayload,
+  IUser,
+  IToken,
+} from '@myapp/models/auth.model';
 import {call, put, takeLatest, all, select} from 'redux-saga/effects';
 import {authActions, selectAccessToken} from './auth.slice';
 
 function* handleLogin(action: PayloadAction<ILoginPayload>) {
   try {
-    const response: IUser = yield call(authenApi.loginAPI, action.payload);
+    const response: IToken = yield call(authenApi.loginAPI, action.payload);
     //dispatch
     //non-blocking call
     yield put({type: authActions.loginSuccess.type, payload: response});
@@ -18,7 +23,7 @@ function* handleLogin(action: PayloadAction<ILoginPayload>) {
 
 function* handleRegister(action: PayloadAction<IRegisterPayload>) {
   try {
-    const response: IUser = yield call(authenApi.registerAPI, action.payload);
+    const response: IToken = yield call(authenApi.registerAPI, action.payload);
 
     yield put({type: authActions.registerSuccess.type, payload: response});
   } catch (error) {

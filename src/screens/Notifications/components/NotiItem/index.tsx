@@ -1,15 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React from 'react';
 
 import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {Surface, Divider, Headline, Button, useTheme} from 'react-native-paper';
-// import {useNavigation} from '@react-navigation/native';
+import {
+  Surface,
+  Divider,
+  Headline,
+  Button,
+  useTheme,
+  Subheading,
+} from 'react-native-paper';
+
+import {format} from 'date-fns';
 
 interface INotiItem {
   name: string;
   countComment: number;
   countFollow: number;
   navigate: () => void;
+  creationTime: string;
 }
 
 const NotiItem: React.FC<INotiItem> = ({
@@ -17,8 +26,8 @@ const NotiItem: React.FC<INotiItem> = ({
   countComment,
   countFollow,
   navigate,
+  creationTime,
 }) => {
-  // const navigation = useNavigation();
   const theme = useTheme();
 
   return (
@@ -31,6 +40,10 @@ const NotiItem: React.FC<INotiItem> = ({
               style={{color: theme.colors.primary, fontSize: 20}}>
               {name}
             </Headline>
+
+            <Subheading>
+              {format(new Date(creationTime), 'K:m aaa - MMM, dd yyyy')}
+            </Subheading>
           </Surface>
 
           <Divider style={styles.divider} />

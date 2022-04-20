@@ -21,6 +21,7 @@ const GeneralScreen = ({navigation}: any) => {
         countComment={item.countComment}
         countFollow={item.countFollow}
         navigate={() => navigation.navigate('Detail', item)}
+        creationTime={item.creationTime}
       />
     );
   };

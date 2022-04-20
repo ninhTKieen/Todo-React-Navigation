@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, StyleSheet, Dimensions, ScrollView} from 'react-native';
-import {Text, Title} from 'react-native-paper';
+import {Title} from 'react-native-paper';
 import NotificationContent from '@myapp/screens/Notifications/components/Content';
 import NotificationComments from '@myapp/screens/Notifications/components/Comment';
 

@@ -54,3 +54,7 @@ export interface IAuthState {
 export interface IToken {
   accessToken: string;
 }
+
+export interface ICanLogin {
+  canLogin: boolean;
+}

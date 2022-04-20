@@ -4,15 +4,13 @@ import {
   IRegisterPayload,
   IToken,
   IUser,
+  ICanLogin,
 } from '@myapp/models/auth.model';
 
 import {axiosRequest, axiosMethod} from '@myapp/utils/api.utils';
 
 class AuthenAPI {
-  async loginAPI({
-    email,
-    password,
-  }: ILoginPayload): Promise<{accessToken: string}> {
+  async loginAPI({email, password}: ILoginPayload): Promise<IToken> {
     const url = `${API_END_POINT}/api/TokenAuth/Authenticate`;
     const data = {
       userNameOrEmailAddress: email,
@@ -38,7 +36,7 @@ class AuthenAPI {
     address,
     gender,
     dateOfBirth,
-  }: IRegisterPayload): Promise<{canLogin: boolean}> {
+  }: IRegisterPayload): Promise<ICanLogin> {
     const url = `${API_END_POINT}/api/services/app/Account/Register`;
     const data = {
       name,

@@ -85,6 +85,8 @@ export const authActions = authSlice.actions;
 //Selectors
 export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
 export const selectCurrentUser = (state: any) => state.auth.currentUser;
+export const selectIsPendingRegister = (state: any) =>
+  state.auth.isPendingRegister;
 export const selectIsPendingLoggedIn = (state: any) =>
   state.auth.isPendingLoggedIn;
 export const selectAccessToken = (state: any) => state.auth.accessToken;

@@ -47,6 +47,11 @@ const ProfileScreen: React.FC = () => {
       </View>
 
       <View style={styles.itemContainer}>
+        <Text>Name</Text>
+        <Text>{currentUser?.name}</Text>
+      </View>
+
+      <View style={styles.itemContainer}>
         <Text>Email</Text>
         <Text>{currentUser?.emailAddress}</Text>
       </View>

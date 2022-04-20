@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
 import {
@@ -13,15 +14,20 @@ import {
   Title,
   Subheading,
   Button,
+  useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-date-picker';
 
-import {authActions} from '@myapp/features/auth/auth.slice';
-import {useAppDispatch} from '@myapp/hooks/redux.hook';
+import {
+  authActions,
+  selectIsPendingRegister,
+} from '@myapp/features/auth/auth.slice';
+import {useAppDispatch, useAppSelector} from '@myapp/hooks/redux.hook';
 
 const RegisterScreen = ({navigation}: any) => {
   const dispatch = useAppDispatch();
+  const isPendingRegister = useAppSelector(selectIsPendingRegister);
 
   const [name, setName] = React.useState<string>('');
   const [surname, setSurname] = React.useState<string>('');
@@ -33,6 +39,8 @@ const RegisterScreen = ({navigation}: any) => {
   const [gender, setGender] = React.useState<string>('');
   const [dateOfBirth, setDateOfBirth] = React.useState<Date>(new Date());
   const [visible, setVisible] = React.useState(false);
+
+  const theme = useTheme();
 
   const onRegisterButtonPress = (): void => {
     if (!!emailAddress && !!name && !!userName && !!password) {
@@ -159,13 +167,18 @@ const RegisterScreen = ({navigation}: any) => {
               onDateChange={setDateOfBirth}
               mode="date"
               style={{height: 50, width: 220}}
+              theme="dark"
+              maximumDate={new Date()}
+              textColor={theme.colors.text}
+              fadeToColor="none"
             />
           </Surface>
 
           <Button
             mode="contained"
             style={styles.button}
-            onPress={onRegisterButtonPress}>
+            onPress={onRegisterButtonPress}
+            loading={isPendingRegister}>
             <Text>Register</Text>
           </Button>
 

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Keyboard,
   Text,
+  ScrollView,
 } from 'react-native';
 import {
   Surface,
@@ -63,132 +64,134 @@ const RegisterScreen = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Surface style={styles.innerContainer}>
-          <Title style={styles.title}>Hello</Title>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <Surface style={styles.innerContainer}>
+            <Title style={styles.title}>Hello</Title>
 
-          <Subheading style={{marginBottom: 10}}>
-            Register new account
-          </Subheading>
+            <Subheading style={{marginBottom: 10}}>
+              Register new account
+            </Subheading>
 
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Name"
-              style={styles.inputWrapper}
-              right={<TextInput.Icon name="account" />}
-              value={name}
-              onChangeText={setName}
-            />
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Name"
+                style={styles.inputWrapper}
+                right={<TextInput.Icon name="account" />}
+                value={name}
+                onChangeText={setName}
+              />
 
-            <TextInput
-              mode="outlined"
-              label="Surname"
-              style={styles.inputWrapper}
-              right={<TextInput.Icon name="account" />}
-              value={surname}
-              onChangeText={setSurname}
-            />
+              <TextInput
+                mode="outlined"
+                label="Surname"
+                style={styles.inputWrapper}
+                right={<TextInput.Icon name="account" />}
+                value={surname}
+                onChangeText={setSurname}
+              />
+            </Surface>
+
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Email"
+                style={styles.input}
+                right={<TextInput.Icon name="email" />}
+                value={emailAddress}
+                onChangeText={setEmailAddress}
+              />
+            </Surface>
+
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Username"
+                style={styles.input}
+                right={<TextInput.Icon name="email" />}
+                value={userName}
+                onChangeText={setUserName}
+              />
+            </Surface>
+
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Phone"
+                style={styles.inputWrapper}
+                right={<TextInput.Icon name="phone" />}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+              />
+
+              <TextInput
+                mode="outlined"
+                label="Gender"
+                style={styles.inputWrapper}
+                right={<TextInput.Icon name="gender-male-female" />}
+                value={gender}
+                onChangeText={setGender}
+              />
+            </Surface>
+
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Password"
+                style={styles.input}
+                secureTextEntry={!visible}
+                right={
+                  <TextInput.Icon
+                    name={visible ? 'eye-off' : 'eye'}
+                    onPress={() => setVisible(!visible)}
+                  />
+                }
+                value={password}
+                onChangeText={setPassword}
+              />
+            </Surface>
+
+            <Surface style={styles.wrapper}>
+              <TextInput
+                mode="outlined"
+                label="Address"
+                style={styles.input}
+                right={<TextInput.Icon name="directions" />}
+                value={address}
+                onChangeText={setAddress}
+              />
+            </Surface>
+
+            <Surface style={styles.dateOfBirth}>
+              <Icon name="birthday-cake" size={32} />
+              <DatePicker
+                date={dateOfBirth}
+                onDateChange={setDateOfBirth}
+                mode="date"
+                style={{height: 50, width: 220}}
+                theme="dark"
+                maximumDate={new Date()}
+                textColor={theme.colors.text}
+                fadeToColor="none"
+              />
+            </Surface>
+
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onRegisterButtonPress}
+              loading={isPendingRegister}>
+              <Text>Register</Text>
+            </Button>
+
+            <Button
+              mode="text"
+              style={styles.button}
+              onPress={() => navigation.navigate('Login')}>
+              Already have an account ?
+            </Button>
           </Surface>
-
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Email"
-              style={styles.input}
-              right={<TextInput.Icon name="email" />}
-              value={emailAddress}
-              onChangeText={setEmailAddress}
-            />
-          </Surface>
-
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Username"
-              style={styles.input}
-              right={<TextInput.Icon name="email" />}
-              value={userName}
-              onChangeText={setUserName}
-            />
-          </Surface>
-
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Phone"
-              style={styles.inputWrapper}
-              right={<TextInput.Icon name="phone" />}
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
-            />
-
-            <TextInput
-              mode="outlined"
-              label="Gender"
-              style={styles.inputWrapper}
-              right={<TextInput.Icon name="gender-male-female" />}
-              value={gender}
-              onChangeText={setGender}
-            />
-          </Surface>
-
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Password"
-              style={styles.input}
-              secureTextEntry={!visible}
-              right={
-                <TextInput.Icon
-                  name={visible ? 'eye-off' : 'eye'}
-                  onPress={() => setVisible(!visible)}
-                />
-              }
-              value={password}
-              onChangeText={setPassword}
-            />
-          </Surface>
-
-          <Surface style={styles.wrapper}>
-            <TextInput
-              mode="outlined"
-              label="Address"
-              style={styles.input}
-              right={<TextInput.Icon name="directions" />}
-              value={address}
-              onChangeText={setAddress}
-            />
-          </Surface>
-
-          <Surface style={styles.dateOfBirth}>
-            <Icon name="birthday-cake" size={32} />
-            <DatePicker
-              date={dateOfBirth}
-              onDateChange={setDateOfBirth}
-              mode="date"
-              style={{height: 50, width: 220}}
-              theme="dark"
-              maximumDate={new Date()}
-              textColor={theme.colors.text}
-              fadeToColor="none"
-            />
-          </Surface>
-
-          <Button
-            mode="contained"
-            style={styles.button}
-            onPress={onRegisterButtonPress}
-            loading={isPendingRegister}>
-            <Text>Register</Text>
-          </Button>
-
-          <Button
-            mode="text"
-            style={styles.button}
-            onPress={() => navigation.navigate('Login')}>
-            Already have an account ?
-          </Button>
-        </Surface>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

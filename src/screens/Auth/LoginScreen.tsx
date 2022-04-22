@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Image,
   Text,
+  ScrollView,
 } from 'react-native';
 import {Surface, Title, Button, TextInput} from 'react-native-paper';
 
@@ -31,60 +32,62 @@ const LoginScreen: React.FC = ({navigation}: any) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Surface style={styles.inner}>
-          <Image
-            source={require('@myapp/assets/todoIcon.png')}
-            style={styles.image}
-          />
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <Surface style={styles.inner}>
+            <Image
+              source={require('@myapp/assets/todoIcon.png')}
+              style={styles.image}
+            />
 
-          <Title style={styles.title}>Login</Title>
+            <Title style={styles.title}>Login</Title>
 
-          <TextInput
-            label="Email"
-            right={<TextInput.Icon name="account" />}
-            style={styles.input}
-            mode="outlined"
-            value={email}
-            onChangeText={text => setEmail(text)}
-          />
+            <TextInput
+              label="Email"
+              right={<TextInput.Icon name="account" />}
+              style={styles.input}
+              mode="outlined"
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
 
-          <TextInput
-            label="Password"
-            right={
-              <TextInput.Icon
-                name={visible ? 'eye-off' : 'eye'}
-                onPress={() => setVisible(!visible)}
-              />
-            }
-            style={styles.input}
-            secureTextEntry={!visible}
-            mode="outlined"
-            value={password}
-            onChangeText={text => setPassword(text)}
-          />
+            <TextInput
+              label="Password"
+              right={
+                <TextInput.Icon
+                  name={visible ? 'eye-off' : 'eye'}
+                  onPress={() => setVisible(!visible)}
+                />
+              }
+              style={styles.input}
+              secureTextEntry={!visible}
+              mode="outlined"
+              value={password}
+              onChangeText={text => setPassword(text)}
+            />
 
-          <Button
-            mode="contained"
-            onPress={() =>
-              dispatch(
-                authActions.login({
-                  email,
-                  password,
-                }),
-              )
-            }
-            style={styles.button}
-            loading={isPendingLoggedIn}>
-            <Text>Login</Text>
-          </Button>
+            <Button
+              mode="contained"
+              onPress={() =>
+                dispatch(
+                  authActions.login({
+                    email,
+                    password,
+                  }),
+                )
+              }
+              style={styles.button}
+              loading={isPendingLoggedIn}>
+              <Text>Login</Text>
+            </Button>
 
-          <Button
-            mode="text"
-            style={styles.button}
-            onPress={() => navigation.navigate('Register')}>
-            Don't have an account ?
-          </Button>
-        </Surface>
+            <Button
+              mode="text"
+              style={styles.button}
+              onPress={() => navigation.navigate('Register')}>
+              Don't have an account ?
+            </Button>
+          </Surface>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
